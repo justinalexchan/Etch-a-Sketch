@@ -1,0 +1,65 @@
+<html>
+<title>ETCH-A-SKETCH</title>
+<center><h1>ETCH-A-SKETCH</h1></center>
+
+
+
+
+
+<script>
+    //Var
+    let contWidth = 800;
+    let contHeight = 400;
+    let numOfDivs = 16;
+    let htmlContainer = document.querySelector('html');
+    let containerCenter = document.createElement('center');
+    let containerDiv = document.createElement('div');
+
+    let space = document.createElement('br');
+    let resetBtn = document.createElement('button');
+    resetBtn.textContent ='Reset';
+
+    //Main div setup
+    containerDiv.id = 'main';
+    containerDiv.style.backgroundColor = 'black';
+    containerDiv.style.width = contWidth;
+    containerDiv.style.height = contHeight;
+
+    //Div Grid loop
+    function divGrid(){
+        for (var i = 0; i < numOfDivs; i++){
+            for (var j = 0; j < numOfDivs; j++){
+                const subDiv = document.createElement('div');
+                subDiv.addEventListener("mouseover", function(e){
+                    subDiv.style.backgroundColor = 'red';
+                })
+                subDiv.style.display = 'inline-block';
+                subDiv.className += "divGrid";
+                subDiv.style.backgroundColor = 'whitesmoke';
+                subDiv.style.width = contWidth/numOfDivs;
+                subDiv.style.height = contHeight/numOfDivs;
+                containerDiv.appendChild(subDiv); 
+            }
+            const nexLine = document.createElement('br');
+            containerDiv.appendChild(nexLine);
+        }
+        containerCenter.appendChild(space);
+        containerCenter.appendChild(resetBtn);
+
+        containerCenter.appendChild(containerDiv);
+        htmlContainer.appendChild(containerCenter);
+    }
+    //Reset btn
+    resetBtn.addEventListener("click" , function(){
+        console.log('reset');
+        document.getElementById('main').remove();
+        containerDiv = document.createElement('div');
+        containerDiv.id = 'main';
+        numOfDivs =  prompt('Enter new size of grid (enter a integer): ');
+        
+        divGrid();
+    })
+    
+    divGrid();
+</script>
+</html>
